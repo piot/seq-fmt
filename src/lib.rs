@@ -1,5 +1,4 @@
 use std::fmt::Display;
-use std::fmt::Debug;
 
 pub fn comma<T: Display>(values: &[T]) -> String {
     match values.len() {
@@ -18,7 +17,6 @@ pub fn comma<T: Display>(values: &[T]) -> String {
     }
 }
 
-
 pub fn comma_tuple<K: Display, V: Display>(values: &[(K, V)]) -> String {
     let mut result = String::new();
     for (i, (key, value)) in values.iter().enumerate() {
@@ -26,6 +24,17 @@ pub fn comma_tuple<K: Display, V: Display>(values: &[(K, V)]) -> String {
             result.push_str(", ");
         }
         result.push_str(format!("{}: {}", key, value).as_str());
+    }
+    result
+}
+
+pub fn fmt_nl<T: Display>(values: &[T]) -> String {
+    let mut result = String::new();
+    for (i, value) in values.iter().enumerate() {
+        if i > 0 {
+            result.push_str("\n");
+        }
+        result.push_str(&value.to_string());
     }
     result
 }
